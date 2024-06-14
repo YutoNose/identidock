@@ -1,0 +1,5 @@
+# Jenkinsプラグインの最新バージョンを記載
+scm-api:690.vfc8b_54395023
+git:5.2.2
+git-client:4.7.0
+greenballs:1.15.1
