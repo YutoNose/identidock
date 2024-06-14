@@ -5,7 +5,7 @@ if [ "$ENV" = "DEV" ]; then
     echo "Running Development Server"
     exec python "/app/identidock.py"
 elif [ "$ENV" = "UNIT" ]; then
-    echo "Running Production Server"
+    echo "Running Unit test"
     exec python "/app/tests.py"
 else
     echo "Running Production Server"
