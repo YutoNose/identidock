@@ -1,24 +1,15 @@
-version: '3'
-services:
-  redis:
-    image: redis:latest
-    platform: linux/arm64
-    ports:
-      - "6379:6379"  # 必要に応じてポート設定を追加
+identidock:
+  build: .
+  expose:
+   - "9090"
+  environment:
+    ENV: PROD
+  links:
+   - dnmonster
+   - redis
 
-  dnmonster:
-    image: amouat/dnmonster:1.0
-    platform: linux/amd64
-    ports:
-      - "8080:8080"  # 必要に応じてポート設定を追加
+dnmonster:
+  image: amouat/dnmonster:1.0
 
-  identidock:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    platform: linux/arm64
-    ports:
-      - "9090:9090"
-      - "9191:9191"
-    environment:
-      - ENV=PROD  # 環境変数をここで指定
+redis:
+  image: redis:3.0
