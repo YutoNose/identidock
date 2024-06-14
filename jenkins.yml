@@ -4,7 +4,7 @@ services:
     platform: linux/arm64
   dnmonster:
     image: amouat/dnmonster:1.0
-    platform: linux/arm64
+    platform: linux/amd64
   identidock:
     build:
       context: .
