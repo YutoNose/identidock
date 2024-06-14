@@ -3,7 +3,7 @@ services:
     image: redis:latest
     platform: linux/arm64
   dnmonster:
-    image: dnmonster:latest
+    image: amouat/dnmonster:1.0
     platform: linux/arm64
   identidock:
     build:
