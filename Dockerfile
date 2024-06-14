@@ -24,10 +24,14 @@ WORKDIR /app
 
 # ホストのappディレクトリをコンテナの/appディレクトリにコピー
 COPY app /app
-COPY cmd.sh /
+# ローカルのcmd.shをコンテナにコピー
+COPY cmd.sh /app/
+
+# cmd.shに実行権限を付与
+RUN chmod +x /app/cmd.sh
+
+# ENTRYPOINTとしてcmd.shを設定
+ENTRYPOINT ["/app/cmd.sh"]
 
 EXPOSE 9090 9191
 USER uwsgi
-
-RUN chmod +x /cmd.sh
-CMD ["/cmd.sh"]
