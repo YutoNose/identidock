@@ -1,16 +1,13 @@
 services:
-  identidock:
-    build: .
-    expose:
-      - "9090"
-    environment:
-      ENV: PROD
-    links:
-      - dnmonster
-      - redis
-
-  dnmonster:
-    image: amouat/dnmonster:1.0
-
   redis:
-    image: redis:3.0
+    image: redis:latest
+    platform: linux/arm64
+  dnmonster:
+    image: dnmonster:latest
+    platform: linux/arm64
+  identidock:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - platform=linux/arm64
