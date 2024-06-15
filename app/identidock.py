@@ -12,10 +12,12 @@ default_name = 'Joe Bloggs'
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
     name = default_name
+    name_hash = hashlib.sha256((salt + name).encode()).hexdigest()  # 初期化を追加
     if request.method == 'POST':
-        name = html.escape(request.form['name'],quote=True)
+        name = html.escape(request.form['name'], quote=True)
         salted_name = salt + name
         name_hash = hashlib.sha256(salted_name.encode()).hexdigest()
+
     header = '<html><head><title>IdentiDock</title></head><body>'
     body = '''<form method="POST">
                 Hello <input type="text" name="name" value="{}">
@@ -32,15 +34,5 @@ def main_page():
 def get_monster(name):
     image = cache.get(name)
     if image is None:
-        print ("Cache miss", flush=True)
-        r = requests.get('http://dnmonster:8080/monster/' + name + '?size=80')
-        image = r.content
-        cache.set(name,image)
-
-    return Response(image, mimetype='image/png')
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=9090)
-
-
-
+        print("Cache miss", flush=True)
+        r = requests.get('http://dnmonster:8
