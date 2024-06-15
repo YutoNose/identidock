@@ -1,16 +1,27 @@
+version: '3.8'
+
 services:
-  identidock:
-    build: .
-    expose:
-      - "9090"
-    environment:
-      - ENV=PROD
-    links:
-      - dnmonster
-      - redis
+  redis:
+    image: redis:3.0
+    platform: linux/amd64  # ここにプラットフォームを指定
+    ports:
+      - "6379:6379"
 
   dnmonster:
     image: amouat/dnmonster:latest
+    platform: linux/amd64  # ここにプラットフォームを指定
+    ports:
+      - "8080:8080"
 
-  redis:
-    image: redis:3.0
+  identidock:
+    build: .
+    platform: linux/amd64  # ここにプラットフォームを指定
+    ports:
+      - "9090:9090"
+    environment:
+      - ENV=DEV
+    volumes:
+      - ./app:/app
+    depends_on:
+      - dnmonster
+      - redis
