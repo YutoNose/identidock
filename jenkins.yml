@@ -11,7 +11,7 @@ services:
     image: amouat/dnmonster:latest
     platform: linux/amd64  # ここにプラットフォームを指定
     ports:
-      - "8080:8080"
+      - "8181:8181"
 
   identidock:
     build: .
