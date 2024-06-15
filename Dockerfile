@@ -31,7 +31,7 @@ COPY cmd.sh /app/
 RUN chmod +x /app/cmd.sh
 
 # ENTRYPOINTとしてcmd.shを設定
-ENTRYPOINT ["/app/cmd.sh"]
+ENTRYPOINT ["/var/jenkins_home/workspace/identidock/app/cmd.sh"]
 
 EXPOSE 9090 9191
 USER uwsgi
