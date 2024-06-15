@@ -20,15 +20,15 @@ RUN pip install --upgrade pip
 RUN pip install Flask==2.1.2 uWSGI==2.0.19.1 Werkzeug==2.2.2 requests==2.5.1 redis==2.10.3
 
 # ワーキングディレクトリを設定
-WORKDIR /app
+WORKDIR /var/jenkins_home/workspace/identidock/app
 
-# ホストのappディレクトリをコンテナの/appディレクトリにコピー
-COPY app /app
+# ホストのappディレクトリをコンテナの/var/jenkins_home/workspace/identidock/appディレクトリにコピー
+COPY app /var/jenkins_home/workspace/identidock/app
 # ローカルのcmd.shをコンテナにコピー
-COPY cmd.sh /app/
+COPY cmd.sh /var/jenkins_home/workspace/identidock/app/
 
 # cmd.shに実行権限を付与
-RUN chmod +x /app/cmd.sh
+RUN chmod +x /var/jenkins_home/workspace/identidock/app/cmd.sh
 
 # ENTRYPOINTとしてcmd.shを設定
 ENTRYPOINT ["/var/jenkins_home/workspace/identidock/app/cmd.sh"]
